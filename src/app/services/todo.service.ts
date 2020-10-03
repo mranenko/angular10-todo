@@ -31,7 +31,7 @@ export class TodoService {
     }
   ];
 
-  constructor(private localStorageService: StorageService) {
+  constructor(private storageService: StorageService) {
   }
 
   getList(): Todo[] {
