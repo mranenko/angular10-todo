@@ -1,0 +1,37 @@
+/*
+  Header title
+ */
+
+.header {
+  .title,
+  .subtitle {
+    margin: 0;
+  }
+
+  .title {
+    text-transform: uppercase;
+  }
+}
+
+
+/*
+  Header navigation
+ */
+
+.header {
+  nav.nav-header,
+  .nav.nav-header {
+    ul {
+      margin: 0 -1rem;
+    }
+
+    ul li a {
+      font-size: 3rem;
+      padding: 1rem;
+
+      &:hover {
+        opacity: .85;
+      }
+    }
+  }
+}

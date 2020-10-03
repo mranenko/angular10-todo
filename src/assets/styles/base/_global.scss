@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  @include contrast(color(black));
+
+  font: font(text, weight) 10px/1.5 font(text, family);
+}
+
+body {
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: font(text, size);
+}
+
+h1, h2, h3, h4, h5, h6, .title, .subtitle {
+  font-family: font(title, family);
+  font-weight: font(title, weight);
+}
+h1, .title {
+  font-size: font(h1, size);
+  margin: font(h1, margin);
+}
+h2, .subtitle {
+  font-size: font(h2, size);
+  margin: font(h2, margin);
+}
+h3 {
+  font-size: font(h3, size);
+  margin: font(h3, margin);
+}
+h4 {
+  font-size: font(h4, size);
+  margin: font(h4, margin);
+}
+h5 { font-size: font(h5, size); }
+h6 { font-size: font(h6, size); }
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+/**
+	Header, footer, main page sections
+ */
+
+.header {
+  @include contrast(color-neutral(800));
+
+  padding: 2rem;
+}
+
+.footer {
+  @include contrast(color(black));
+
+  padding: 2rem;
+}
+
+.main {
+  background: none;
+  color: inherit;
+  padding: 2rem;
+}
+
+
+/**
+	Ensure page footer always stays at the bottom
+ */
+
+html,
+body,
+app-root {
+  min-height: 100vh;
+}
+
+body,
+app-root {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer,
+.header,
+.main {
+  flex-shrink: 0;
+}
+
+.main {
+  flex-grow: 1;
+}

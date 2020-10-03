@@ -1,0 +1,30 @@
+/**
+  Color functions
+ */
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+@function color-level($color: color(neutral), $level: 500, $color-interval: 18%) {
+  @if ($level < 500) {
+    $-color-percentage: $color-interval * ((500 - $level) / 100);
+    @return tint($color, $-color-percentage);
+  }
+  @else if ($level > 500) {
+    $-color-percentage: $color-interval * (($level - 500) / 100);
+    @return shade($color, $-color-percentage);
+  }
+  @else {
+    @return $color;
+  }
+}
+
+@function contrast($color, $dark: color(black), $light: color(white)) {
+  @if (lightness($color) > 75) { @return $dark; }
+  @else { @return $light; }
+}

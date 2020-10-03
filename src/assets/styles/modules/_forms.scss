@@ -1,0 +1,46 @@
+label,
+input,
+select,
+textarea {
+  margin: .2rem 0;
+}
+
+input,
+select,
+textarea {
+  @include contrast(color(white));
+
+  border: 0;
+  padding: .5rem;
+}
+
+input {
+  line-height: 2rem;
+}
+
+
+input[type='checkbox'],
+input[type='radio'] {
+  margin: .2rem;
+}
+
+input[type='checkbox'] + label,
+input[type='radio'] + label {
+  cursor: pointer;
+}
+
+
+/**
+  Group of form inputs and corresponding labels
+ */
+
+.form-group {
+  display: block;
+
+  label,
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea {
+    width: 100%;
+  }
+}

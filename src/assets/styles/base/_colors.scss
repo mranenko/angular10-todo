@@ -1,0 +1,100 @@
+/**
+	Color variables
+ */
+
+$-dark-teal: #22686f;
+$-mint: #6be2e1;
+$-earth: #d0bfca;
+$-snow: #ffffff;
+
+$-go: #399074;
+$-sea: #396c90;
+$-stop: #a72b36;
+$-caution: #d27a1f;
+
+
+/**
+	Main colors and accessor functions
+ */
+
+$colors: (
+  primary: $-dark-teal,
+  accent: $-mint,
+  neutral: $-earth,
+  white: $-snow,
+
+  success: $-go,
+  info: $-sea,
+  danger: $-stop,
+  warning: $-caution,
+);
+
+@function color($key) { @return map-get($colors, $key); }
+
+
+/**
+  Main color levels
+ */
+
+$color-primary: (
+  50: color-level(color(primary), 50),
+  100: color-level(color(primary), 100),
+  200: color-level(color(primary), 200),
+  300: color-level(color(primary), 300),
+  400: color-level(color(primary), 400),
+  500: color-level(color(primary), 500),
+  600: color-level(color(primary), 600),
+  700: color-level(color(primary), 700),
+  800: color-level(color(primary), 800),
+  900: color-level(color(primary), 900),
+);
+
+$color-accent: (
+  50: color-level(color(accent), 50),
+  100: color-level(color(accent), 100),
+  200: color-level(color(accent), 200),
+  300: color-level(color(accent), 300),
+  400: color-level(color(accent), 400),
+  500: color-level(color(accent), 500),
+  600: color-level(color(accent), 600),
+  700: color-level(color(accent), 700),
+  800: color-level(color(accent), 800),
+  900: color-level(color(accent), 900),
+);
+
+$color-neutral: (
+  50: color-level(color(neutral), 50),
+  100: color-level(color(neutral), 100),
+  200: color-level(color(neutral), 200),
+  300: color-level(color(neutral), 300),
+  400: color-level(color(neutral), 400),
+  500: color-level(color(neutral), 500),
+  600: color-level(color(neutral), 600),
+  700: color-level(color(neutral), 700),
+  800: color-level(color(neutral), 800),
+  900: color-level(color(neutral), 900),
+);
+
+@function color-primary($key) {
+  @return map-get($color-primary, $key);
+}
+
+@function color-accent($key) {
+  @return map-get($color-accent, $key);
+}
+
+@function color-neutral($key) {
+  @return map-get($color-neutral, $key);
+}
+
+
+/**
+  Additional neutral colors
+ */
+
+$colors: map-merge($colors,
+  (
+    black: color-neutral(900),
+    light: color-neutral(50),
+  )
+);

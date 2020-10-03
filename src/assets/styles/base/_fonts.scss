@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
+
+/**
+  Font map by property
+ */
+
+$font: (
+  family: (
+    code: #{'Source Code Pro', Courier, monospace},
+    text: #{'Source Sans Pro', Arial, sans-serif},
+    title: #{'Source Sans Pro', Arial, sans-serif},
+  ),
+
+  weight: (
+    thin: 200,
+    light: 300,
+    normal: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+    black: 900,
+  )
+);
+
+
+/**
+  Font map accessor function
+ */
+
+@function font($keys...) {
+  $value: $font;
+
+  @each $key in $keys {
+    $value: map-get($value, $key);
+  }
+
+  @return $value;
+}
+
+
+/**
+  Font map by element type
+ */
+
+$font: map-merge($font, (
+  text: (
+    family: font(family, text),
+    size: 1.4rem,
+    weight: font(weight, normal),
+  ),
+
+  title: (
+    family: font(family, title),
+    weight: font(weight, semibold),
+  ),
+));
+
+
+/**
+  Font map by element
+ */
+
+$font: map-merge($font, (
+  h1: (
+    size: 2.4rem,
+    margin: 0 0 2rem,
+  ),
+
+  h2: (
+    size: 2rem,
+    margin: 0 0 1.5rem,
+  ),
+
+  h3: (
+    size: 1.8rem,
+    margin: 0 0 1rem,
+  ),
+
+  h4: (
+    size: 1.6rem,
+    margin: 0 0 .5rem,
+  ),
+
+  h5: (
+    size: 1.4rem,
+  ),
+
+  h6: (
+    size: 1.2rem,
+  ),
+));

@@ -1,0 +1,4 @@
+@mixin contrast($background: color(neutral), $dark: color(black), $light: color(white)) {
+  background: $background;
+  color: contrast($background, $dark, $light);
+}

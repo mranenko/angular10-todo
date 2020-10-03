@@ -1,0 +1,17 @@
+nav,
+.nav {
+  ul {
+    display: block;
+    list-style: none;
+  }
+
+  ul li,
+  ul li a {
+    color: inherit;
+    display: inline-block;
+  }
+
+  ul li a {
+    text-decoration: none;
+  }
+}
