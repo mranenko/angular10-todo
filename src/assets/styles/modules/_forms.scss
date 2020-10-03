@@ -8,10 +8,10 @@ textarea {
 input,
 select,
 textarea {
-  @include contrast(color(white));
+  @include contrast(color-neutral(500));
 
   border: 0;
-  padding: .5rem;
+  padding: 1rem;
 }
 
 input {

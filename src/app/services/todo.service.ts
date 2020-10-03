@@ -34,6 +34,16 @@ export class TodoService {
   constructor(private storageService: StorageService) {
   }
 
+  add(todo: string): void {
+    if (todo) {
+      this.todoList.push({
+        task: todo,
+        timeCreated: new Date(),
+        timeCompleted: null,
+      });
+    }
+  }
+
   getList(): Todo[] {
     return this.todoList;
   }

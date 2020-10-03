@@ -1,0 +1,18 @@
+<footer class="footer">
+  <div class="row">
+    <div class="col-8">
+      <div class="form-group">
+        <input type="text" placeholder="Something to do today..."
+               [(ngModel)]="todo">
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="form-group">
+        <button class="button button-primary" (click)="onTodoAdd($event)">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>

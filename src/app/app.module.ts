@@ -8,6 +8,7 @@ import {AppHeaderComponent} from './components/app-header/app-header.component';
 import {TodoListComponent} from './components/todo-list/todo-list.component';
 import {TodoPageComponent} from './pages/todo-page/todo-page.component';
 import {SettingsPageComponent} from './pages/settings-page/settings-page.component';
+import {AppFooterComponent} from './components/app-footer/app-footer.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {SettingsPageComponent} from './pages/settings-page/settings-page.compone
     TodoListComponent,
     TodoPageComponent,
     SettingsPageComponent,
+    AppFooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,5 +28,4 @@ import {SettingsPageComponent} from './pages/settings-page/settings-page.compone
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
 }
