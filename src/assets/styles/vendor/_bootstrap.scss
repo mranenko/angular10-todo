@@ -1,0 +1,16 @@
+/* custom row/column spacing */
+.row {
+  margin: 0 -.5rem !important;
+
+  .col,
+  [class^='col-'] {
+    padding: 0 .5rem !important;
+  }
+}
+
+/* vertical row alignment */
+.row {
+  &.row-align-bottom { align-items: flex-end; }
+  &.row-align-middle { align-items: center; }
+  &.row-align-top { align-items: flex-start; }
+}
