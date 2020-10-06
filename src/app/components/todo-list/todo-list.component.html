@@ -4,13 +4,10 @@
 
 <div *ngIf="todoList.length > 0">
   <ul class="todo-list">
-  <li *ngFor="let todo of todoList; let todoIndex = index"
-    [ngClass]="{
-      'todo': true,
-      'done': todo.timeCompleted !== null
-    }"
-    (click)="onTodoClick(todoIndex)">
-    {{ todo.task }}
-  </li>
+    <li *ngFor="let todo of todoList; let todoIndex = index"
+        [className]="todo.timeCompleted !== null ? 'todo todo-done' : 'todo'"
+        (click)="onTodoClick(todoIndex)">
+      {{ todo.task }}
+    </li>
   </ul>
 </div>
