@@ -8,28 +8,11 @@ import {StorageService} from './storage.service';
   providedIn: 'root'
 })
 export class TodoService {
-  todoList: Todo[] = [
-    {
-      task: 'Walk the dog',
-      timeCreated: new Date(),
-      timeCompleted: new Date(),
-    },
-    {
-      task: 'Do laundry',
-      timeCreated: new Date(),
-      timeCompleted: null,
-    },
-    {
-      task: 'Go to the gym',
-      timeCreated: new Date(),
-      timeCompleted: null,
-    },
-    {
-      task: 'Get groceries',
-      timeCreated: new Date(),
-      timeCompleted: null,
-    }
-  ];
+  readonly key = {
+    todoList: 'todo-list',
+  };
+
+  todoList: Todo[] = [];
 
   constructor(private storageService: StorageService) {
   }
@@ -42,9 +25,13 @@ export class TodoService {
         timeCompleted: null,
       });
     }
+
+    this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
   }
 
   getList(): Todo[] {
+    this.todoList = JSON.parse(this.storageService.get(this.key.todoList)) || [];
+
     return this.todoList;
   }
 
