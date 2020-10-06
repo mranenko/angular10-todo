@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-/* App services */
+/* app services */
 import {StorageService} from './storage.service';
 
 
@@ -17,6 +17,11 @@ export class TodoService {
   constructor(private storageService: StorageService) {
   }
 
+  getList(): Todo[] {
+    this.todoList = JSON.parse(this.storageService.get(this.key.todoList)) || [];
+    return this.todoList;
+  }
+
   add(todo: string): void {
     if (todo) {
       this.todoList.push({
@@ -29,18 +34,19 @@ export class TodoService {
     this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
   }
 
-  getList(): Todo[] {
-    this.todoList = JSON.parse(this.storageService.get(this.key.todoList)) || [];
-
-    return this.todoList;
-  }
-
   toggleComplete(todoIndex: number): void {
     if (todoIndex < this.todoList.length) {
       this.todoList[todoIndex].timeCompleted =
         (this.todoList[todoIndex].timeCompleted === null) ?
           new Date() : null;
+
+      /* save list change */
+      this.saveList();
     }
+  }
+
+  private saveList(): void {
+    this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
   }
 }
 
