@@ -1,3 +1,9 @@
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+@import 'base/colors';
+
+
 /*
   Header title
  */
@@ -22,15 +28,26 @@
   nav.nav-header,
   .nav.nav-header {
     ul {
-      margin: 0 -1rem;
+      margin: 0 -.5rem;
     }
 
-    ul li a {
-      font-size: 3rem;
-      padding: 1rem;
+    ul li .link {
+      @include contrast(color-neutral(700));
+      @include size(6rem);
 
-      &:hover {
+      border-radius: 50%;
+      font-size: 2rem;
+      line-height: 1;
+      margin: 0 .5rem;
+      padding: 2rem;
+
+      &:hover,
+      &.hover {
         opacity: .85;
+      }
+
+      &.link-active {
+        @include contrast(color(primary));
       }
     }
   }

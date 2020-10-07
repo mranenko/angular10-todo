@@ -13,6 +13,11 @@ button,
   &.hover {
     opacity: .85;
   }
+
+
+  &.button-primary {
+    @include contrast(color(primary));
+  }
 }
 
 

@@ -2,8 +2,8 @@
 	Color variables
  */
 
-$-dark-teal: #22686f;
-$-mint: #6be2e1;
+$-teal: #45908f;
+$-peach: #daa13a;
 $-earth: #d0bfca;
 $-snow: #ffffff;
 
@@ -18,8 +18,8 @@ $-caution: #d27a1f;
  */
 
 $colors: (
-  primary: $-dark-teal,
-  accent: $-mint,
+  primary: $-teal,
+  accent: $-peach,
   neutral: $-earth,
   white: $-snow,
 
