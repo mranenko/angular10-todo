@@ -1,10 +1,19 @@
-<div *ngIf="todoList.length === 0">
+<div *ngIf="todoService.todoList.length === 0">
   Add something to do today!
 </div>
 
-<div *ngIf="todoList.length > 0">
+<div *ngIf="todoService.todoList.length > 0">
+  <nav class="nav nav-todo">
+    <ul>
+      <li><a (click)="onClearAll()">Clear all</a></li>
+      <li *ngIf="getContainsCompleted()">
+        <a (click)="onClearCompleted()">Clear completed</a>
+      </li>
+    </ul>
+  </nav>
+
   <ul class="todo-list">
-    <li *ngFor="let todo of todoList; let todoIndex = index"
+    <li *ngFor="let todo of todoService.todoList; let todoIndex = index"
         [className]="todo.timeCompleted !== null ? 'todo todo-done' : 'todo'"
         (click)="onTodoClick(todoIndex)">
       {{ todo.task }}

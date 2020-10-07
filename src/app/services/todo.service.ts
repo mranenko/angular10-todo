@@ -15,12 +15,14 @@ export class TodoService {
   todoList: Todo[] = [];
 
   constructor(private storageService: StorageService) {
+    /* load list from storage (if exists) */
+    this.todoList = JSON.parse(this.storageService.get(this.key.todoList)) || [];
   }
 
-  getList(): Todo[] {
-    this.todoList = JSON.parse(this.storageService.get(this.key.todoList)) || [];
-    return this.todoList;
-  }
+
+  /*
+    Todo list manipulation
+   */
 
   add(todo: string): void {
     if (todo) {
@@ -31,25 +33,44 @@ export class TodoService {
       });
     }
 
-    this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
+    this.saveList();
   }
 
-  toggleComplete(todoIndex: number): void {
+  clearAll(): void {
+    this.todoList = [];
+    this.saveList();
+  }
+
+  clearCompleted(): void {
+    this.todoList = this.todoList.filter(todo => (todo.timeCompleted === null));
+    this.saveList();
+  }
+
+  toggleCompleted(todoIndex: number): void {
     if (todoIndex < this.todoList.length) {
       this.todoList[todoIndex].timeCompleted =
         (this.todoList[todoIndex].timeCompleted === null) ?
           new Date() : null;
 
-      /* save list change */
       this.saveList();
     }
   }
 
+
+  /*
+    Private methods
+   */
+
   private saveList(): void {
+    /* save list to storage */
     this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
   }
 }
 
+
+/*
+  Data model
+ */
 
 interface Todo {
   task: string;

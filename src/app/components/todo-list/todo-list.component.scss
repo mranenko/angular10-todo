@@ -30,3 +30,17 @@
     text-decoration: line-through;
   }
 }
+
+
+.nav.nav-todo {
+  ul {
+    margin: -4rem -1rem 0;
+    text-align: right;
+  }
+
+  ul li {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    padding: 1rem;
+  }
+}

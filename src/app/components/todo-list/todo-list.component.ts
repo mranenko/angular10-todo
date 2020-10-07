@@ -7,16 +7,41 @@ import {TodoService} from '../../services/todo.service';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
-  todoList = [];
-
   constructor(private todoService: TodoService) {
   }
 
   ngOnInit(): void {
-    this.todoList = this.todoService.getList();
+  }
+
+
+  /*
+    Event handlers
+   */
+
+  onClearAll(): void {
+    this.todoService.clearAll();
+  }
+
+  onClearCompleted(): void {
+    this.todoService.clearCompleted();
   }
 
   onTodoClick(todoIndex): void {
-    this.todoService.toggleComplete(todoIndex);
+    this.todoService.toggleCompleted(todoIndex);
+  }
+
+
+  /*
+    Private methods
+   */
+
+  private getContainsCompleted(): boolean {
+    let containsCompleted = false;
+
+    this.todoService.todoList.forEach((todo) => {
+      containsCompleted = containsCompleted || (todo.timeCompleted !== null);
+    });
+
+    return containsCompleted;
   }
 }
