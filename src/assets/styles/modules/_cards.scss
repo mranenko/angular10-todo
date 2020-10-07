@@ -1,5 +1,6 @@
 .card {
   @include contrast(color-neutral(600));
 
+  margin: 0 0 .5rem;
   padding: 1.5rem 2rem;
 }
