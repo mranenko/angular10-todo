@@ -1,20 +1,36 @@
 <h2 class="title">Settings</h2>
 
 <div class="card">
-  <h3 class="subtitle">Sort</h3>
+  <h3>Sort order</h3>
 
   <div class="form-group">
-    <input id="alphabetically" name="sort" type="radio">
-    <label for="alphabetically" name="sort">Alphabetically</label>
+    <input id="alphabetical" name="sortOrder" type="radio" [value]="todoService.sortOrder.alphabetical"
+           [checked]="todoService.settings.sortOrder === todoService.sortOrder.alphabetical"
+           (change)="onSettingsChange($event)">
+    <label for="alphabetical">Alphabetical</label>
   </div>
 
   <div class="form-group">
-    <input id="time-added" name="sort" type="radio">
-    <label for="time-added" name="sort">By time added</label>
+    <input id="newestFirst" name="sortOrder" type="radio" [value]="todoService.sortOrder.newestFirst"
+           [checked]="todoService.settings.sortOrder === todoService.sortOrder.newestFirst"
+           (change)="onSettingsChange($event)">
+    <label for="newestFirst">Newest first</label>
   </div>
 
   <div class="form-group">
-    <input id="time-completed" name="sort" type="radio">
-    <label for="time-completed" name="sort">By time completed</label>
+    <input id="oldestFirst" name="sortOrder" type="radio" [value]="todoService.sortOrder.oldestFirst"
+           [checked]="todoService.settings.sortOrder === todoService.sortOrder.oldestFirst"
+           (change)="onSettingsChange($event)">
+    <label for="oldestFirst">Oldest first</label>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="form-group">
+    <input id="incompleteFirst" type="checkbox" value="incompleteFirst"
+           [checked]="todoService.settings.incompleteFirst === true"
+           (change)="onSettingsChange($event)">
+    <label for="incompleteFirst">Move completed tasks to the bottom</label>
   </div>
 </div>
