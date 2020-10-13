@@ -3,4 +3,14 @@
 
   margin: 0 0 .5rem;
   padding: 1.5rem 2rem;
+
+  .title {
+    font-size: font(h3, size);
+    margin: font(h3, margin);
+  }
+
+  .subtitle {
+    font-size: font(h4, size);
+    margin: font(h4, margin);
+  }
 }

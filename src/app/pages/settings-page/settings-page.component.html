@@ -1,7 +1,7 @@
 <h2 class="title">Settings</h2>
 
 <div class="card">
-  <h3>Sort order</h3>
+  <h3 class="title">Sort order</h3>
 
   <div class="form-group">
     <input id="alphabetical" name="sortOrder" type="radio" [value]="todoService.sortOrder.alphabetical"
@@ -27,6 +27,15 @@
 
 
 <div class="card">
+  <h3 class="title">Completed tasks</h3>
+
+  <div class="form-group">
+    <input id="autoRemoveCompleted" type="checkbox" value="autoRemoveCompleted"
+           [checked]="todoService.settings.autoRemoveCompleted === true"
+           (change)="onSettingsChange($event)">
+    <label for="autoRemoveCompleted">Auto-remove completed tasks</label>
+  </div>
+
   <div class="form-group">
     <input id="incompleteFirst" type="checkbox" value="incompleteFirst"
            [checked]="todoService.settings.incompleteFirst === true"

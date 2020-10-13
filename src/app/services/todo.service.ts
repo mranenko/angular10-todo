@@ -26,6 +26,7 @@ export class TodoService {
     /* load data from storage (if exist) */
     this.settings = JSON.parse(this.storageService.get(this.key.settings)) ||
       {
+        autoRemoveCompleted: false,
         incompleteFirst: true,
         sortOrder: this.sortOrder.newestFirst,
       };
@@ -159,6 +160,7 @@ interface Todo {
 }
 
 interface Settings {
+  autoRemoveCompleted: boolean;
   incompleteFirst: boolean;
   sortOrder: string;
 }

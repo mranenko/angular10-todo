@@ -29,11 +29,13 @@ export class SettingsPageComponent implements OnInit {
 
     if (settingName) {
       this.todoService.settings[settingName] = settingValue;
-      this.todoService.applySetting(settingName, settingValue);
+      // this.todoService.applySetting(settingName, settingValue);
     }
     else {
       this.todoService.settings[settingValue] = settingChecked;
-      this.todoService.applySetting(settingValue, settingChecked);
+      // this.todoService.applySetting(settingValue, settingChecked);
     }
+
+    this.todoService.applySettings();
   }
 }
