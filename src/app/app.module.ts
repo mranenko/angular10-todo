@@ -14,8 +14,9 @@ import {SettingsPageComponent} from './pages/settings-page/settings-page.compone
 import {TodoPageComponent} from './pages/todo-page/todo-page.component';
 
 /* app pipes */
-import {AutoRemoveCompletedPipe} from './pipes/auto-remove-completed.pipe';
+import {HideCompletedPipe} from './pipes/hide-completed.pipe';
 import {IncompleteFirstPipe} from './pipes/incomplete-first.pipe';
+import {SortPipe} from './pipes/sort.pipe';
 
 
 @NgModule({
@@ -26,8 +27,9 @@ import {IncompleteFirstPipe} from './pipes/incomplete-first.pipe';
     TodoListComponent,
     SettingsPageComponent,
     TodoPageComponent,
-    AutoRemoveCompletedPipe,
+    HideCompletedPipe,
     IncompleteFirstPipe,
+    SortPipe,
   ],
   imports: [
     AppRoutingModule,

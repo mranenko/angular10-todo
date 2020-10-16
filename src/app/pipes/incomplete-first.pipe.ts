@@ -2,7 +2,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 
 @Pipe({
-  name: 'incompleteFirst'
+  name: 'incompleteFirst',
+  pure: false,
 })
 export class IncompleteFirstPipe implements PipeTransform {
   transform(items: any[], incompleteFirst: boolean): any[] {

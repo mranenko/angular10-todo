@@ -19,14 +19,30 @@ input {
 }
 
 
+/*
+  Checkboxes and radio buttons
+ */
+
 input[type='checkbox'],
 input[type='radio'] {
   margin: .2rem;
-}
+  opacity: 1;
 
-input[type='checkbox'] + label,
-input[type='radio'] + label {
-  cursor: pointer;
+  + label {
+    cursor: pointer;
+  }
+
+
+  &:disabled {
+    &,
+    + label {
+      opacity: .7;
+    }
+
+    + label {
+      cursor: default;
+    }
+  }
 }
 
 
