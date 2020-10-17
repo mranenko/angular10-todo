@@ -30,8 +30,4 @@ export class StorageService {
       window.localStorage.removeItem(key);
     }
   }
-
-  clear(): void {
-    window.localStorage.clear();
-  }
 }

@@ -21,18 +21,6 @@ export class SettingsPageComponent implements OnInit {
    */
 
   onSettingsChange(event: Event): void {
-    const eventTarget = <HTMLInputElement>event.target;
-    const settingName = eventTarget.name || '';
-    const settingValue = eventTarget.value;
-    const settingChecked = eventTarget.checked;
-
-    if (settingName) {
-      this.todoService.settings[settingName] = settingValue;
-    }
-    else {
-      this.todoService.settings[settingValue] = settingChecked;
-    }
-
     this.todoService.saveSettings();
   }
 }
