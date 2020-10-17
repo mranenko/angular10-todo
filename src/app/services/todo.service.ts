@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 /* app services */
+import {IdService} from './id.service';
 import {StorageService} from './storage.service';
 
 
@@ -22,45 +23,28 @@ export class TodoService {
   settings: Settings = null;
   todoList: Todo[] = [];
 
-  constructor(private storageService: StorageService) {
+  constructor(private idService: IdService,
+              private storageService: StorageService) {
     /* load data from storage (if exist) */
     this.settings = JSON.parse(this.storageService.get(this.key.settings)) ||
       {
-        autoRemoveCompleted: false,
+        hideCompleted: false,
         incompleteFirst: true,
         sortOrder: this.sortOrder.newestFirst,
       };
 
     this.todoList = JSON.parse(this.storageService.get(this.key.todoList)) || [];
   }
-
-  applySettings(): void {
-    /* apply all of the specified todo list settings */
-    for (let [setting, value] of Object.entries(this.settings)) {
-      console.log(`${setting}: ${value}`);
-      this.applySetting(setting, value);
-    }
-  }
-
-  applySetting(setting, value): void {
-    if (setting === 'sortOrder') {
-      this.sort(value);
-    }
-    else if (setting === 'incompleteFirst') {
-      this.showIncompleteFirst(value);
+  
+  toggleCompleted(id: string): void {
+    for (const todo of this.todoList) {
+      if (todo.id === id) {
+        todo.timeCompleted = (todo.timeCompleted === null) ? new Date() : null;
+        break;
+      }
     }
 
-    this.saveSettings();
-  }
-
-  toggleCompleted(todoIndex: number): void {
-    if (todoIndex < this.todoList.length) {
-      this.todoList[todoIndex].timeCompleted =
-        (this.todoList[todoIndex].timeCompleted === null) ?
-          new Date() : null;
-
-      this.applySettings();
-    }
+    this.saveTodo();
   }
 
 
@@ -71,13 +55,13 @@ export class TodoService {
   add(todo: string): void {
     if (todo) {
       this.todoList.unshift({
+        id: this.idService.getRandomId(),
         task: todo,
         timeCreated: new Date(),
         timeCompleted: null,
       });
     }
 
-    this.applySettings();
     this.saveTodo();
   }
 
@@ -86,17 +70,12 @@ export class TodoService {
     this.saveTodo();
   }
 
-  clearCompleted(): void {
-    this.todoList = this.todoList.filter(todo => (todo.timeCompleted === null));
-    this.saveTodo();
-  }
-
 
   /*
     Private methods
    */
 
-  private saveSettings(): void {
+  saveSettings(): void {
     /* save settings to storage */
     this.storageService.set(this.key.settings, JSON.stringify(this.settings));
   }
@@ -104,23 +83,6 @@ export class TodoService {
   private saveTodo(): void {
     /* save list to storage */
     this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
-  }
-
-  private showIncompleteFirst(incompleteFirst: boolean): void {
-    if (incompleteFirst && this.todoList.length > 0) {
-      let incompleteTodoList = this.todoList.filter(todo => (todo.timeCompleted === null));
-      let completedTodoList = this.todoList.filter(todo => (todo.timeCompleted !== null));
-
-      if (incompleteTodoList.length > 0 && completedTodoList.length > 0) {
-        console.log(incompleteTodoList.concat(completedTodoList));
-        this.todoList = incompleteTodoList.concat(completedTodoList);
-      }
-    }
-    else if (!incompleteFirst && this.todoList.length > 0) {
-      this.sort(this.settings.sortOrder);
-    }
-
-    this.saveTodo();
   }
 
   private sort(sortOrder: string): void {
@@ -154,13 +116,14 @@ export class TodoService {
  */
 
 interface Todo {
+  id: string,
   task: string;
   timeCreated: Date;
   timeCompleted: Date;
 }
 
 interface Settings {
-  autoRemoveCompleted: boolean;
+  hideCompleted: boolean;
   incompleteFirst: boolean;
   sortOrder: string;
 }

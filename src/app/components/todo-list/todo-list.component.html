@@ -6,16 +6,16 @@
   <nav class="nav nav-todo">
     <ul>
       <li><a (click)="onClearAll()">Clear all</a></li>
-      <li *ngIf="getContainsCompleted()">
-        <a (click)="onClearCompleted()">Clear completed</a>
-      </li>
     </ul>
   </nav>
 
   <ul class="todo-list">
-    <li *ngFor="let todo of todoService.todoList; let todoIndex = index"
+    <li *ngFor="let todo of todoService.todoList |
+      sort: todoService.settings.sortOrder |
+      hideCompleted: todoService.settings.hideCompleted |
+      incompleteFirst: todoService.settings.incompleteFirst"
         [className]="todo.timeCompleted !== null ? 'todo todo-done' : 'todo'"
-        (click)="onTodoClick(todoIndex)">
+        (click)="onTodoClick(todo.id)">
       {{ todo.task }}
     </li>
   </ul>
