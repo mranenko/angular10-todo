@@ -2,14 +2,15 @@
   <div class="row">
     <div class="col">
       <div class="form-group">
-        <input type="text" placeholder="Something to do today..."
+        <input autofocus type="text" placeholder="Something to do today..."
+               (keyup.enter)="onTodoAdd()"
                [(ngModel)]="todo">
       </div>
     </div>
 
     <div class="col-auto">
       <div class="form-group">
-        <button class="button button-primary" (click)="onTodoAdd($event)">
+        <button class="button button-primary" (click)="onTodoAdd()">
           Add
         </button>
       </div>
