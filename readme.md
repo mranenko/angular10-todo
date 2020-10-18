@@ -1,6 +1,6 @@
 <img src="src/assets/images/screenshots/todo-list.png" alt="" style="margin: 0 auto; max-width: 100%;" />
 
-# Todo (under construction!)
+# Todo list
 
 This is a simple todo list app created with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.
 

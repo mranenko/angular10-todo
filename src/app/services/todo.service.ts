@@ -49,7 +49,7 @@ export class TodoService {
 
 
   /*
-    Todo list manipulation and sorting
+    Todo list methods
    */
 
   add(todo: string): void {
@@ -83,30 +83,6 @@ export class TodoService {
   private saveTodo(): void {
     /* save list to storage */
     this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
-  }
-
-  private sort(sortOrder: string): void {
-    const dateComparator = (a, b) => {
-      return new Date(a).getTime() - new Date(b).getTime();
-    };
-
-    const stringComparator = (a, b) => {
-      a = a.toLowerCase();
-      b = b.toLowerCase();
-      return (a < b) ? -1 : (a > b) ? 1 : 0;
-    };
-
-    if (sortOrder === this.sortOrder.alphabetical) {
-      this.todoList.sort((a, b) => stringComparator(a.task, b.task));
-    }
-    else if (sortOrder === this.sortOrder.newestFirst) {
-      this.todoList.sort((a, b) => dateComparator(b.timeCreated, a.timeCreated));
-    }
-    else if (sortOrder === this.sortOrder.oldestFirst) {
-      this.todoList.sort((a, b) => dateComparator(a.timeCreated, b.timeCreated));
-    }
-
-    this.saveTodo();
   }
 }
 
