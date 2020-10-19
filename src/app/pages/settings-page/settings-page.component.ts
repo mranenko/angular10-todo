@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
+/* app models */
+import {TodoSortOrder} from '../../models/todo-settings.model';
+
 /* app services */
 import {TodoService} from "../../services/todo.service";
 
@@ -15,12 +18,16 @@ export class SettingsPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public get todoSortOrder(): typeof TodoSortOrder {
+    return TodoSortOrder;
+  }
+
 
   /**
    * Event handlers
    */
 
-  onSettingsChange(event: Event): void {
-    this.todoService.saveSettings();
+  onSettingsChange(): void {
+    this.todoService.saveTodoSettings();
   }
 }

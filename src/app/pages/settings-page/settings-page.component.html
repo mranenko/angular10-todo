@@ -4,23 +4,23 @@
   <h3 class="title">Sort order</h3>
 
   <div class="form-group">
-    <input id="alphabetical" name="sortOrder" type="radio" [value]="todoService.sortOrder.alphabetical"
+    <input id="alphabetical" name="sortOrder" type="radio" [value]="todoSortOrder.Alphabetical"
            [(ngModel)]="todoService.settings.sortOrder"
-           (change)="onSettingsChange($event)">
+           (change)="onSettingsChange()">
     <label for="alphabetical">Alphabetical</label>
   </div>
 
   <div class="form-group">
-    <input id="newestFirst" name="sortOrder" type="radio" [value]="todoService.sortOrder.newestFirst"
+    <input id="newestFirst" name="sortOrder" type="radio" [value]="todoSortOrder.NewestFirst"
            [(ngModel)]="todoService.settings.sortOrder"
-           (change)="onSettingsChange($event)">
+           (change)="onSettingsChange()">
     <label for="newestFirst">Newest first</label>
   </div>
 
   <div class="form-group">
-    <input id="oldestFirst" name="sortOrder" type="radio" [value]="todoService.sortOrder.oldestFirst"
+    <input id="oldestFirst" name="sortOrder" type="radio" [value]="todoSortOrder.OldestFirst"
            [(ngModel)]="todoService.settings.sortOrder"
-           (change)="onSettingsChange($event)">
+           (change)="onSettingsChange()">
     <label for="oldestFirst">Oldest first</label>
   </div>
 </div>
@@ -32,7 +32,7 @@
   <div class="form-group">
     <input id="hideCompleted" type="checkbox" value="hideCompleted"
            [(ngModel)]="todoService.settings.hideCompleted"
-           (change)="onSettingsChange($event)">
+           (change)="onSettingsChange()">
     <label for="hideCompleted">Hide completed tasks</label>
   </div>
 
@@ -40,7 +40,7 @@
     <input id="incompleteFirst" type="checkbox" value="incompleteFirst"
            [(ngModel)]="todoService.settings.incompleteFirst"
            [disabled]="todoService.settings.hideCompleted"
-           (change)="onSettingsChange($event)">
+           (change)="onSettingsChange()">
     <label for="incompleteFirst">Move completed tasks to the bottom</label>
   </div>
 </div>

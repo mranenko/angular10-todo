@@ -23,7 +23,7 @@ export class TodoService {
 
   constructor(private storageService: StorageService) {
     /* load settings and todo list data from storage (if exist) */
-    this.settings = JSON.parse(this.storageService.get(this.key.settings)) || TodoSettings.defaultSettings;
+    this.settings = JSON.parse(this.storageService.get(this.key.settings)) || new TodoSettings();
     this.todoList = JSON.parse(this.storageService.get(this.key.todoList)) || [];
   }
   
@@ -38,11 +38,6 @@ export class TodoService {
     this.saveTodoItemList();
   }
 
-
-  /*
-    Todo list methods
-   */
-
   add(todo: string): void {
     if (todo) {
       this.todoList.push(new TodoItem(todo));
@@ -55,18 +50,13 @@ export class TodoService {
     this.saveTodoItemList();
   }
 
-
-  /*
-    Private methods
-   */
-
-  saveSettings(): void {
-    /* save settings to storage */
-    this.storageService.set(this.key.settings, JSON.stringify(this.settings));
-  }
-
-  private saveTodoItemList(): void {
+  saveTodoItemList(): void {
     /* save list to storage */
     this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
+  }
+
+  saveTodoSettings(): void {
+    /* save settings to storage */
+    this.storageService.set(this.key.settings, JSON.stringify(this.settings));
   }
 }
