@@ -1,7 +1,10 @@
 import {Injectable} from '@angular/core';
 
+/* app models */
+import {TodoItem} from '../models/todo-item.model';
+import {TodoSettings} from '../models/todo-settings.model';
+
 /* app services */
-import {IdService} from './id.service';
 import {StorageService} from './storage.service';
 
 
@@ -9,30 +12,18 @@ import {StorageService} from './storage.service';
   providedIn: 'root'
 })
 export class TodoService {
+  /* local storage keys */
   readonly key = {
     settings: 'settings',
     todoList: 'todo-list',
   };
 
-  readonly sortOrder = {
-    alphabetical: 'alphabetical',
-    newestFirst: 'newestFirst',
-    oldestFirst: 'oldestFirst',
-  };
+  settings: TodoSettings = null;
+  todoList: TodoItem[] = [];
 
-  settings: Settings = null;
-  todoList: Todo[] = [];
-
-  constructor(private idService: IdService,
-              private storageService: StorageService) {
-    /* load data from storage (if exist) */
-    this.settings = JSON.parse(this.storageService.get(this.key.settings)) ||
-      {
-        hideCompleted: false,
-        incompleteFirst: true,
-        sortOrder: this.sortOrder.newestFirst,
-      };
-
+  constructor(private storageService: StorageService) {
+    /* load settings and todo list data from storage (if exist) */
+    this.settings = JSON.parse(this.storageService.get(this.key.settings)) || TodoSettings.defaultSettings;
     this.todoList = JSON.parse(this.storageService.get(this.key.todoList)) || [];
   }
   
@@ -44,7 +35,7 @@ export class TodoService {
       }
     }
 
-    this.saveTodo();
+    this.saveTodoItemList();
   }
 
 
@@ -54,20 +45,14 @@ export class TodoService {
 
   add(todo: string): void {
     if (todo) {
-      this.todoList.unshift({
-        id: this.idService.getRandomId(),
-        task: todo,
-        timeCreated: new Date(),
-        timeCompleted: null,
-      });
+      this.todoList.push(new TodoItem(todo));
+      this.saveTodoItemList();
     }
-
-    this.saveTodo();
   }
 
   clearAll(): void {
     this.todoList = [];
-    this.saveTodo();
+    this.saveTodoItemList();
   }
 
 
@@ -80,26 +65,8 @@ export class TodoService {
     this.storageService.set(this.key.settings, JSON.stringify(this.settings));
   }
 
-  private saveTodo(): void {
+  private saveTodoItemList(): void {
     /* save list to storage */
     this.storageService.set(this.key.todoList, JSON.stringify(this.todoList));
   }
-}
-
-
-/*
-  Data models
- */
-
-interface Todo {
-  id: string,
-  task: string;
-  timeCreated: Date;
-  timeCompleted: Date;
-}
-
-interface Settings {
-  hideCompleted: boolean;
-  incompleteFirst: boolean;
-  sortOrder: string;
 }

@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/* app models */
+import {TodoSettings} from '../models/todo-settings.model';
+
 
 @Pipe({
   name: 'sort',
@@ -22,11 +25,11 @@ export class SortPipe implements PipeTransform {
     };
 
     switch(sortOrder) {
-      case 'alphabetical':
+      case TodoSettings.sortOrder.alphabetical:
         return items.sort((a, b) => stringComparator(a.task, b.task));
-      case 'newestFirst':
+      case TodoSettings.sortOrder.newestFirst:
         return items.sort((a, b) => dateComparator(b.timeCreated, a.timeCreated));
-      case 'oldestFirst':
+      case TodoSettings.sortOrder.oldestFirst:
         return items.sort((a, b) => dateComparator(a.timeCreated, b.timeCreated));
       default:
         return items;
